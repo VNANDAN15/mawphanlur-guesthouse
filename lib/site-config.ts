@@ -8,8 +8,6 @@ export const siteConfig = {
     plusCode: 'GCVJ+QQ, Mawphanlur, Meghalaya',
     mapsUrl: 'https://maps.app.goo.gl/Z2LQKNApSn9b9eoS9',
     reviewsUrl: 'https://maps.app.goo.gl/XBjvMx39FXFx1oTp8',
-    phone: '',
-    phoneVerified: false,
     rating: 4.4,
     reviewCount: 702,
   },
