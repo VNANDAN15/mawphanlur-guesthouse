@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 const inquirySchema = z.object({
   fullName: z.string().trim().min(2).max(100),
-  phone: z.string().trim().regex(/^\+?[\d\s().-]{7,20}$/),
+  phone: z.string().trim().regex(/^\+?[0-9\s().-]{7,20}$/),
   email: z.string().trim().email().optional().or(z.literal('')),
   checkIn: z.string().date(),
   checkOut: z.string().date(),
