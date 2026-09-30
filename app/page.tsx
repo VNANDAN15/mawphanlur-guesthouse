@@ -10,15 +10,14 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const [lightbox, setLightbox] = useState<number | null>(null)
+  const [enquirySent, setEnquirySent] = useState(false)
 
   const go = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); setMenuOpen(false) }
 
   const handleEnquiry = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
-    const subject = `Stay enquiry from ${form.get('name') || 'guest'}`
-    const body = [`Name: ${form.get('name') || ''}`, `Check-in: ${form.get('checkIn') || ''}`, `Check-out: ${form.get('checkOut') || ''}`, '', String(form.get('message') || '')].join('\\n')
-    window.location.href = `mailto:hello@mawphanlur.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    setEnquirySent(true)
+    event.currentTarget.reset()
   }
 
   return (
@@ -61,7 +60,7 @@ export default function Page() {
 
       <section id="location" className="section location-section"><div className="container location-grid"><div><p className="kicker">05 — Find us</p><h2>Somewhere<br /><em>worth the journey.</em></h2><p className="location-copy">Tucked into the hills of Meghalaya, Mawphanlur is best reached slowly. Check Google Maps before travelling and allow extra time in wet weather.</p><a className="button button-dark" href={siteConfig.business.mapsUrl} target="_blank" rel="noreferrer">Get directions <ArrowRight size={16} /></a></div><div className="map-card"><div className="map-lines" /><MapPin size={30} /><strong>Mawphanlur Natural<br />Lake Guesthouse</strong><span>{siteConfig.business.address}</span><a href={siteConfig.business.mapsUrl} target="_blank" rel="noreferrer">Open in Google Maps ↗</a></div></div><div className="container distances">{siteConfig.distances.map(([place, distance]) => <div key={place}><span>{place}</span><strong>{distance}</strong></div>)}</div></section>
 
-      <section id="inquiry" className="inquiry-section"><div className="container inquiry-grid"><div><p className="kicker light">Plan your stay</p><h2>Come find<br /><em>your quiet.</em></h2><p>Tell us a little about your visit and we’ll get back to you with current availability and room options.</p><div className="inquiry-meta"><span><CalendarDays size={17} /> Flexible enquiries</span><span><Check size={17} /> Personal response</span></div></div><form className="inquiry-form" onSubmit={handleEnquiry}><label>Your name<input name="name" required placeholder="e.g. Ananya Sharma" /></label><div className="form-row"><label>Check-in<input name="checkIn" type="date" required /></label><label>Check-out<input name="checkOut" type="date" required /></label></div><label>Message<textarea name="message" placeholder="Tell us about your visit..." rows={3} /></label><button className="button button-cream" type="submit">Send enquiry <ArrowRight size={16} /></button><small>We’ll only use your details to respond to this enquiry.</small></form></div></section>
+      <section id="inquiry" className="inquiry-section"><div className="container inquiry-grid"><div><p className="kicker light">Plan your stay</p><h2>Come find<br /><em>your quiet.</em></h2><p>Tell us a little about your visit and we’ll get back to you with current availability and room options.</p><div className="inquiry-meta"><span><CalendarDays size={17} /> Flexible enquiries</span><span><Check size={17} /> Personal response</span></div></div>{enquirySent ? <div className="enquiry-success" role="status"><Check size={25} /><h3>Thanks — your enquiry is ready.</h3><p>Your stay details are ready. Please contact Boney directly for current availability and seasonal rates.</p><button className="button button-cream" type="button" onClick={() => setEnquirySent(false)}>Send another enquiry <ArrowRight size={16} /></button></div> : <form className="inquiry-form" onSubmit={handleEnquiry}><label>Your name<input name="name" required placeholder="e.g. Ananya Sharma" /></label><div className="form-row"><label>Check-in<input name="checkIn" type="date" required /></label><label>Check-out<input name="checkOut" type="date" required /></label></div><label>Message<textarea name="message" placeholder="Tell us about your visit..." rows={3} /></label><button className="button button-cream" type="submit">Send enquiry <ArrowRight size={16} /></button><small>We’ll only use your details to respond to this enquiry.</small></form>}</div></section>
 
       <section className="section faq-section"><div className="container faq-grid"><div><p className="kicker">Good to know</p><h2>Questions,<br /><em>answered.</em></h2></div><div>{['What is the best time to visit?', 'How do I reach Mawphanlur?', 'Are room rates available online?', 'Can I request a specific cottage?'].map((q, i) => <div className="faq-item" key={q}><button onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}><span>{q}</span><ChevronDown size={18} className={openFaq === i ? 'rotate' : ''} /></button>{openFaq === i && <p>{i === 0 ? 'October to April is generally comfortable for exploring Meghalaya. Monsoon months are lush and beautiful, but roads can be more challenging.' : 'Please contact us for the latest information and practical guidance for your visit.'}</p>}</div>)}</div></div></section>
 
