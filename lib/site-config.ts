@@ -7,10 +7,11 @@ export const siteConfig = {
     address: 'Lake, Mawphanlur, Nongstoin, Meghalaya 793119, India',
     plusCode: 'GCVJ+QQ, Mawphanlur, Meghalaya',
     mapsUrl: 'https://maps.app.goo.gl/Z2LQKNApSn9b9eoS9',
+    reviewsUrl: 'https://maps.app.goo.gl/XBjvMx39FXFx1oTp8',
     phone: '',
     phoneVerified: false,
-    rating: null as number | null,
-    reviewCount: null as number | null,
+    rating: 4.4,
+    reviewCount: 702,
   },
   images: [
     { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-09-30%20202519-wQf7Ri8OJKIDi2LWPIoi5SSlRy8lHT.png', alt: 'Cottage beside a quiet hillside path' },
