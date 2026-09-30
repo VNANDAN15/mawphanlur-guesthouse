@@ -29,5 +29,5 @@ export async function POST(request: Request) {
   recent.set(ip, Date.now())
   const { website: _website, ...safe } = parsed.data
   console.info('[inquiry] Email delivery is not configured; sanitized enquiry received.', { fullName: safe.fullName, checkIn: safe.checkIn, checkOut: safe.checkOut, adults: safe.adults })
-  return NextResponse.json({ success: false, message: 'Enquiry delivery is not configured yet. Please try again later.' }, { status: 503 })
+  return NextResponse.json({ success: false, message: "We're unable to receive enquiries at the moment. Please try again later." }, { status: 503 })
 }
